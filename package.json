@@ -2,11 +2,16 @@
   "name": "phone-local",
   "version": "0.1.0",
   "description": "Menu bar Mac app that bridges Discord messages to a local Ollama LLM.",
+  "author": "Shingo Irie",
+  "private": false,
   "license": "MIT",
-  "homepage": "https://github.com/iritec/iritec",
+  "homepage": "https://github.com/iritec/phone-local",
   "repository": {
     "type": "git",
-    "url": "https://github.com/iritec/iritec.git"
+    "url": "https://github.com/iritec/phone-local.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iritec/phone-local/issues"
   },
   "main": "dist/electron/main.js",
   "scripts": {
@@ -16,9 +21,10 @@
     "dev": "pnpm run build && node scripts/run-electron.cjs .",
     "typecheck": "tsc --noEmit",
     "cli": "tsx src/index.ts",
-    "dist:mac": "pnpm run build && electron-builder --mac --arm64 --x64",
+    "dist:mac": "pnpm run build && electron-builder --mac --publish never",
     "verify:mac:prod-env": "node scripts/verify-mac-production-env.js",
-    "dist:mac:prod": "pnpm run verify:mac:prod-env && pnpm run build && electron-builder --mac --arm64 --x64 --publish never",
+    "dist:mac:prod": "pnpm run verify:mac:prod-env && pnpm run build && electron-builder --mac --publish never",
+    "dist:mac:prod:arm64": "pnpm run verify:mac:prod-env && pnpm run build && electron-builder --mac --arm64 --publish never",
     "dist:mac:prod:x64": "pnpm run verify:mac:prod-env && pnpm run build && electron-builder --mac --x64 --publish never"
   },
   "dependencies": {
@@ -41,37 +47,5 @@
       "os": ["darwin"],
       "cpu": ["arm64", "x64"]
     }
-  },
-  "build": {
-    "appId": "com.irie.phonelocal",
-    "productName": "PhoneLocal",
-    "directories": {
-      "output": "release",
-      "buildResources": "build"
-    },
-    "files": [
-      "dist/**/*",
-      "renderer/**/*",
-      "build/icon.png",
-      "build/trayTemplate.png",
-      "build/trayTemplate@2x.png",
-      "package.json"
-    ],
-    "mac": {
-      "icon": "build/icon.icns",
-      "category": "public.app-category.utilities",
-      "target": [
-        { "target": "dmg", "arch": ["arm64", "x64"] }
-      ],
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false,
-      "entitlements": "build/entitlements.mac.plist",
-      "entitlementsInherit": "build/entitlements.mac.inherit.plist",
-      "notarize": false,
-      "extendInfo": {
-        "LSUIElement": true
-      }
-    },
-    "afterSign": "scripts/notarize.js"
   }
 }
