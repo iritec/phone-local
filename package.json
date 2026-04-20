@@ -1,0 +1,68 @@
+{
+  "name": "phone-local",
+  "version": "0.1.0",
+  "description": "Menu bar Mac app that bridges Discord messages to a local Ollama LLM.",
+  "license": "MIT",
+  "homepage": "https://github.com/iritec/iritec",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iritec/iritec.git"
+  },
+  "main": "dist/electron/main.js",
+  "scripts": {
+    "assets:icons": "python3 scripts/generate-icons.py",
+    "build": "tsc -p tsconfig.json",
+    "start": "pnpm run build && node scripts/run-electron.cjs .",
+    "dev": "pnpm run build && node scripts/run-electron.cjs .",
+    "typecheck": "tsc --noEmit",
+    "cli": "tsx src/index.ts",
+    "dist:mac": "pnpm run build && electron-builder --mac --arm64 --x64"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5",
+    "electron-store": "8.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "electron": "^32.2.1",
+    "electron-builder": "^25.1.8",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "pnpm": {
+    "supportedArchitectures": {
+      "os": ["darwin"],
+      "cpu": ["arm64", "x64"]
+    }
+  },
+  "build": {
+    "appId": "com.irie.phonelocal",
+    "productName": "PhoneLocal",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "renderer/**/*",
+      "build/icon.png",
+      "build/trayTemplate.png",
+      "build/trayTemplate@2x.png",
+      "package.json"
+    ],
+    "mac": {
+      "icon": "build/icon.icns",
+      "category": "public.app-category.utilities",
+      "target": [
+        { "target": "dmg", "arch": ["arm64", "x64"] }
+      ],
+      "extendInfo": {
+        "LSUIElement": true
+      }
+    }
+  }
+}

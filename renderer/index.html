@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'"
+    />
+    <title>PhoneLocal Settings</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <div class="brand">
+          <img class="brand-mark" src="../build/icon.png" alt="" />
+          <div class="brand-text">
+            <div class="brand-title">PhoneLocal</div>
+            <div id="brandSub" class="brand-sub">Discord × ローカルLLM</div>
+          </div>
+        </div>
+        <div id="status" class="status status-stopped">
+          <span class="dot"></span>
+          <span class="status-label">読込中…</span>
+        </div>
+      </header>
+
+      <section class="card">
+        <label class="field">
+          <span id="discordTokenLabel" class="label">Discord Bot Token</span>
+          <input id="discordToken" type="password" autocomplete="off" spellcheck="false" placeholder="xxxxx.xxxxx.xxxxx" />
+        </label>
+
+        <label class="field">
+          <span id="allowedChannelIdsLabel" class="label">反応するチャンネルID</span>
+          <input
+            id="allowedChannelIds"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="123456789012345678, 987654321098765432"
+          />
+          <span id="allowedChannelIdsHint" class="field-note">カンマ区切り。空なら DM のみ</span>
+        </label>
+
+        <label class="field">
+          <span id="ollamaModelLabel" class="label">Ollama モデル</span>
+          <div class="field-row">
+            <select id="ollamaModel"></select>
+            <button id="reloadModelsBtn" class="btn btn-ghost btn-inline" type="button">更新</button>
+          </div>
+          <span id="modelHint" class="field-note">Ollama から利用可能なモデルを読み込みます</span>
+        </label>
+
+        <label class="field">
+          <span id="ollamaHostLabel" class="label">Ollama エンドポイント</span>
+          <input id="ollamaHost" type="text" autocomplete="off" spellcheck="false" placeholder="http://localhost:11434" />
+        </label>
+
+        <label class="toggle">
+          <input id="autoLaunch" type="checkbox" />
+          <span id="autoLaunchLabel" class="toggle-label">Mac起動時に自動で立ち上げる</span>
+        </label>
+      </section>
+
+      <section class="actions">
+        <button id="saveBtn" class="btn btn-ghost" type="button">設定を保存</button>
+        <button id="toggleBotBtn" class="btn btn-primary" type="button">ボットを起動</button>
+      </section>
+
+      <p id="message" class="message"></p>
+    </main>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>
