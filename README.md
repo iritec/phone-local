@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/assets/phonelocal-logo.svg" alt="PhoneLocal" width="420" />
+  <img src="build/icon.png" alt="PhoneLocal app icon" width="160" />
   <p><strong>Local-first Discord companion for Ollama on macOS</strong></p>
   <p>Run a personal Discord bot from your menu bar, keep the model local, and ship notarized macOS builds.</p>
   <p>
@@ -48,7 +48,7 @@ It is designed for personal or small-team self-hosted use:
 - Per-conversation model switching with `/model` or `!model`
 - Optional image handling when you choose a vision-capable Ollama model
 - Conversation history and thinking logs stored locally in JSONL files
-- `.env` bootstrap for CLI usage and first-run GUI import
+- Settings window setup with optional local `.env` import
 - Notarization-ready macOS release pipeline
 
 ## Why local-first
@@ -73,13 +73,12 @@ It is designed for personal or small-team self-hosted use:
 git clone https://github.com/iritec/phone-local.git phone-local
 cd phone-local
 pnpm install
-cp .env.example .env
 pnpm start
 ```
 
 Then:
 
-1. Add your Discord bot token and Ollama settings in the menu bar window.
+1. Open the settings window from the menu bar and add your Discord bot token and Ollama settings.
 2. Invite the bot to your server or use DMs.
 3. Start the bot from the app.
 
@@ -142,6 +141,8 @@ CLI mode is useful for headless runs or debugging without Electron.
 | `SYSTEM_PROMPT` | No | built-in | System prompt applied to each conversation |
 | `HISTORY_TURNS` | No | `8` | Number of remembered turns |
 | `LANG` | No | `en` | UI language for the app |
+
+Most users can configure these values in the menu bar settings window. If you run CLI mode, you can also provide them through a local `.env` file.
 
 ## Local data
 
