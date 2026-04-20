@@ -16,7 +16,10 @@
     "dev": "pnpm run build && node scripts/run-electron.cjs .",
     "typecheck": "tsc --noEmit",
     "cli": "tsx src/index.ts",
-    "dist:mac": "pnpm run build && electron-builder --mac --arm64 --x64"
+    "dist:mac": "pnpm run build && electron-builder --mac --arm64 --x64",
+    "verify:mac:prod-env": "node scripts/verify-mac-production-env.js",
+    "dist:mac:prod": "pnpm run verify:mac:prod-env && pnpm run build && electron-builder --mac --arm64 --x64 --publish never",
+    "dist:mac:prod:x64": "pnpm run verify:mac:prod-env && pnpm run build && electron-builder --mac --x64 --publish never"
   },
   "dependencies": {
     "discord.js": "^14.16.3",
@@ -60,9 +63,15 @@
       "target": [
         { "target": "dmg", "arch": ["arm64", "x64"] }
       ],
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.inherit.plist",
+      "notarize": false,
       "extendInfo": {
         "LSUIElement": true
       }
-    }
+    },
+    "afterSign": "scripts/notarize.js"
   }
 }
