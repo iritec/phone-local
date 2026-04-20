@@ -32,5 +32,3 @@ mac:
   artifactName: "${productName}-${version}-${arch}.${ext}"
   extendInfo:
     LSUIElement: true
-
-afterSign: scripts/notarize.js

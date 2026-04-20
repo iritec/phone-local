@@ -20,3 +20,7 @@ builder-effective-config.yaml
 latest*.yml
 app-update.yml
 *.tsbuildinfo
+
+# Local-only build helpers
+scripts/notarize.js
+scripts/verify-mac-production-env.js
