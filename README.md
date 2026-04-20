@@ -1,7 +1,7 @@
 <div align="center">
   <img src="build/icon.png" alt="PhoneLocal app icon" width="160" />
-  <p><strong>Local-first Discord companion for Ollama on macOS</strong></p>
-  <p>Run a Discord bot from your menu bar and keep Ollama on your Mac.</p>
+  <p><strong>Use a powerful local LLM from your phone.</strong></p>
+  <p>Keep the Mac app running and talk to any Ollama model from Discord on your PC or phone.</p>
   <p>
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License" />
     <img src="https://img.shields.io/badge/Platform-macOS-lightgrey" alt="macOS" />
@@ -12,8 +12,8 @@
 
 ## Overview
 
-PhoneLocal is a macOS menu bar app for running a Discord bot against a local Ollama model.
-It is for people who want to build the app from source and use it on their own Mac.
+PhoneLocal is a macOS menu bar app for running Ollama through Discord.
+Start the app on your Mac, pick a model, and chat from Discord anywhere.
 
 ## Screenshots
 
@@ -31,13 +31,6 @@ It is for people who want to build the app from source and use it on their own M
     <td align="center"><strong>Discord chat flow</strong></td>
   </tr>
 </table>
-
-## What it does
-
-- Runs from the macOS menu bar
-- Sends Discord messages to a local Ollama model
-- Lets you control access with Discord allowlists
-- Supports `/ai`, `/think`, `/model`, `!model`, and `!reset`
 
 ## Requirements
 
@@ -83,30 +76,8 @@ The full step-by-step guide is in [docs/discord-bot-setup.md](docs/discord-bot-s
 - `!reset` clears the current conversation history
 - `!model <name>` switches the model for the current conversation
 - `!help` prints inline usage
-- `/ai mode:on|off|status` enables or disables replies for the current channel
-- `/think on|off|status` toggles thinking mode for the current user
+- `/think on|off|status` toggles the model thinking mode
 - `/model` shows or changes the active Ollama model for the current conversation
-
-## Configuration
-
-- Set everything from the settings window for normal use
-- A local `.env` file also works if you prefer env-based setup
-- Main values: `DISCORD_TOKEN`, `ALLOWED_USER_IDS`, `ALLOWED_CHANNEL_IDS`, `ALLOWED_GUILD_IDS`, `OLLAMA_HOST`, `OLLAMA_MODEL`
-
-## Local data
-
-- `./logs/chat-YYYY-MM-DD.jsonl`: chat history and optional thinking traces
-- `./data/ai-state.json`: per-channel AI enablement
-- `./data/thinking.json`: user thinking preferences
-- `~/Library/Application Support/phone-local/settings.json`: Electron app settings
-
-## Build
-
-```bash
-pnpm run dist:mac
-```
-
-Artifacts are written to `release/`.
 
 ## License
 
